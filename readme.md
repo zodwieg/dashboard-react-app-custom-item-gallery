@@ -1,3 +1,7 @@
+<!-- default badges list -->
+![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/436657318/21.2.3%2B)
+[![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
+<!-- default badges end -->
 # Dashboard for React - Custom Item Gallery
 
 The example contains the source code of the most requested custom items you can use in your Web Dashboard application. Use the custom items from this example as they are, or modify them according to your needs. In this Web Dashboard application, you can add custom items from the **Custom Items** group in the [Toolbox](https://docs.devexpress.com/Dashboard/117442/web-dashboard/ui-elements-and-customization/ui-elements/toolbox):
