@@ -1,9 +1,11 @@
-import { CustomItemViewer, ResourceManager } from 'devexpress-dashboard/common'
+import { CustomItemViewer } from 'devexpress-dashboard/common'
 import { CustomItem } from 'devexpress-dashboard/model'
 import { FormItemTemplates } from 'devexpress-dashboard/designer'
 
+const SIMPLE_TABLE_EXTENSION_NAME = 'CustomItemSimpleTable';
+
 const svgIcon = `<?xml version="1.0" encoding="utf-8"?>
-    <svg version="1.1" id="simpleTableIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg version="1.1" id="` + SIMPLE_TABLE_EXTENSION_NAME + `" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
     <path class="dx-dashboard-contrast-icon" d="M21,2H3C2.5,2,2,2.5,2,3v18c0,0.5,0.5,1,1,1h18c0.5,0,1-0.5,1-1V3
         C22,2.5,21.5,2,21,2z M14,4v4h-4V4H14z M10,10h4v4h-4V10z M4,4h4v4H4V4z M4,10h4v4H4V10z M4,20v-4h4v4H4z M10,20v-4h4v4H10z M20,20
@@ -20,7 +22,6 @@ const simpleTableMetadata = {
         dataItemType: 'Measure',
         displayName: "Custom Measure"
     }],
-
     customProperties: [{
         ownerType: CustomItem,
         propertyName: 'showHeaders',
@@ -44,7 +45,7 @@ const simpleTableMetadata = {
             }
         }]
     }],        
-    icon: 'simpleTableIcon',
+    icon: SIMPLE_TABLE_EXTENSION_NAME,
     title: 'Simple Table'
 };
 
@@ -62,14 +63,15 @@ class SimpleTableItemViewer extends CustomItemViewer {
             element.append(this.tableElt);
         }
         this._update(this.getPropertyValue('showHeaders'));
-    };
+    }
     
     _getTextColor() {
         switch (this.getPropertyValue('textColor')) {
             case 'Light': return "gray";
             case 'Dark': return "black";
+            default:
         }
-    };
+    }
 
     _update(mode) {
         while (this.tableElt.firstChild)
@@ -84,7 +86,7 @@ class SimpleTableItemViewer extends CustomItemViewer {
             let valueTexts = rowDataObject.getDisplayText('customDimensions').concat(rowDataObject.getDisplayText('customMeasure'));
             this._addTableRow(valueTexts, false);
         });
-    };
+    }
     _addTableRow(rowValues, isHeader) {
         const row = document.createElement('tr');
 
@@ -97,13 +99,13 @@ class SimpleTableItemViewer extends CustomItemViewer {
         });
 
         this.tableElt.appendChild(row);
-    };
+    }
 }
 
 class SimpleTableItem {
     constructor(dashboardControl) {
-        ResourceManager.registerIcon(svgIcon);    
-        this.name = "simpleTableItem";
+        dashboardControl.registerIcon(svgIcon);    
+        this.name = SIMPLE_TABLE_EXTENSION_NAME;
         this.metaData = simpleTableMetadata;
     }
 

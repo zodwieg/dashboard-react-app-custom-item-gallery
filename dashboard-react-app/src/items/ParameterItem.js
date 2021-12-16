@@ -1,10 +1,12 @@
-import { CustomItemViewer, ResourceManager } from 'devexpress-dashboard/common'
+import { CustomItemViewer } from 'devexpress-dashboard/common'
 import { CustomItem } from 'devexpress-dashboard/model'
 import { FormItemTemplates } from 'devexpress-dashboard/designer'
 import dxButton from "devextreme/ui/button";
 
+const PARAMETER_EXTENSION_NAME = 'ParameterItem';
+
 const svgIcon = `<?xml version="1.0" encoding="utf-8"?>
-    <svg version="1.1" id="parameterItemIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg version="1.1" id="` + PARAMETER_EXTENSION_NAME + `" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
     <g class="st0">
         <path class="dx-dashboard-contrast-icon" d="M6,12c0.4,0,0.7,0.1,1,0.2V5c0-0.6-0.4-1-1-1S5,4.4,5,5v7.2
@@ -65,7 +67,7 @@ const parameterMetadata = {
             },
         }],
     }],
-    icon: 'parameterItemIcon',
+    icon: PARAMETER_EXTENSION_NAME,
     title: 'Parameters',
 };
 
@@ -89,7 +91,7 @@ class ParameterItemViewer extends CustomItemViewer {
     setSize(width, height) {
         super.setSize(width, height);
         this._setGridHeight();
-    };
+    }
     dispose() {
         super.dispose();
         this.parametersContent && this.parametersContent.dispose && this.parametersContent.dispose();
@@ -127,7 +129,7 @@ class ParameterItemViewer extends CustomItemViewer {
             if (this.getPropertyValue('automaticUpdates') !== 'Off')
                 this.buttonContainer.style.display = 'none';
         }
-    };
+    }
     _generateParametersContent() {       
         this.parametersContent = this.parameterExtension.renderContent(this.gridContainer);
         this.parametersContent.valueChanged.add(() => this._updateParameterValues());
@@ -169,13 +171,11 @@ class ParameterItemViewer extends CustomItemViewer {
         });
     }
     _subscribeProperties() {
-        
         this.subscribe('showHeaders', (showHeaders) => { this._update({ showHeaders: showHeaders }); });
         this.subscribe('showParameterName', (showParameterName) => { this._update({ showParameterName: showParameterName }); });
         this.subscribe('automaticUpdates', (automaticUpdates) => { this._update({ automaticUpdates: automaticUpdates }) });
-    };
+    }
     _update(options) {
-        
         if (!!options.showHeaders) {
             this.parametersContent.grid.option('showColumnHeaders', options.showHeaders === 'On');
         }
@@ -197,14 +197,14 @@ class ParameterItemViewer extends CustomItemViewer {
             }
         }
         this._setGridHeight();
-    };
+    }
 }
 
 class ParameterItem {
     constructor(dashboardControl) {
-        ResourceManager.registerIcon(svgIcon);
+        dashboardControl.registerIcon(svgIcon);
         this.dashboardControl = dashboardControl;  
-        this.name = "parameterItem";
+        this.name = PARAMETER_EXTENSION_NAME;
         this.metaData = parameterMetadata;
     }
 

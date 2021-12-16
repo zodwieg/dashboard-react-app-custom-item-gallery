@@ -1,14 +1,17 @@
-import { CustomItemViewer, ResourceManager } from 'devexpress-dashboard/common'
+import { CustomItemViewer } from 'devexpress-dashboard/common'
 import { CustomItem } from 'devexpress-dashboard/model'
 import { FormItemTemplates } from 'devexpress-dashboard/designer'
 import dxMap from 'devextreme/ui/map'
 
-const svgIcon = `<svg version="1.1" id="onlineMapIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+const ONLINE_MAP_EXTENSION_NAME = 'OnlineMap';
+
+const svgIcon = `<svg version="1.1" id="` + ONLINE_MAP_EXTENSION_NAME + `" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
         <path class="dx_darkgray" d="M12,1C8.1,1,5,4.1,5,8c0,3.9,3,10,7,15c4-5,7-11.1,7-15C19,4.1,15.9,1,12,1z M12,12c-2.2,0-4-1.8-4-4
             c0-2.2,1.8-4,4-4s4,1.8,4,4C16,10.2,14.2,12,12,12z"/>
         <circle class="dx_red" cx="12" cy="8" r="2"/>
         </svg>`;
+
 const onlineMapMetadata = {
     bindings:[{
         propertyName: 'Latitude',
@@ -85,7 +88,7 @@ const onlineMapMetadata = {
         filter: true,
         drillDown: false
     },
-    icon: 'onlineMapIcon',
+    icon: ONLINE_MAP_EXTENSION_NAME,
     title: 'Online Map',
     index: 1
 };
@@ -120,7 +123,7 @@ class OnlineMapItemViewer extends CustomItemViewer {
     setSelection(values) {
         super.setSelection(values);
         this._updateSelection();
-    };
+    }
     
     clearSelection() {
         super.clearSelection();
@@ -184,11 +187,10 @@ class OnlineMapItemViewer extends CustomItemViewer {
     }
 }
 
-
 class OnlineMapItem {
     constructor(dashboardControl) {
-        ResourceManager.registerIcon(svgIcon);    
-        this.name = "onlineMapItem";
+        dashboardControl.registerIcon(svgIcon);    
+        this.name = ONLINE_MAP_EXTENSION_NAME;
         this.metaData = onlineMapMetadata;
     }
 
@@ -196,6 +198,5 @@ class OnlineMapItem {
         return new OnlineMapItemViewer(model, $element, content);
     }
 }
-
 
 export default OnlineMapItem;
