@@ -96,7 +96,7 @@ namespace AspNetCoreDashboardBackend {
             return dataSourceStorage;
         }
         private void Configurator_ConfigureDataConnection(object sender, ConfigureDataConnectionWebEventArgs e) {
-            if (e.DataSourceName == "Departments") {
+            if (e.ConnectionName == "localhost_Connection") {
                 e.ConnectionParameters = new XmlFileConnectionParameters() { FileName = FileProvider.GetFileInfo("App_Data/Departments.xml").PhysicalPath };
             }
             if (e.ConnectionName == "energyStatisticsDataConnection") {
