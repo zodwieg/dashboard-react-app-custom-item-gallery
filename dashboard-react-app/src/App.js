@@ -9,6 +9,7 @@ import PolarChartItem from './items/PolarChartItem';
 import GanttItem from './items/GanttItem';
 import ParameterItem from './items/ParameterItem';
 import TreeViewItem from './items/HierarchicalTreeViewItem';
+import FunnelD3Item from './items/FunnelD3Item';
 
 function onBeforeRender(e) { 
   var dashboardControl = e.component;
@@ -20,6 +21,7 @@ function onBeforeRender(e) {
   dashboardControl.registerExtension(new WebPageItem(dashboardControl));
   dashboardControl.registerExtension(new GanttItem(dashboardControl));
   dashboardControl.registerExtension(new TreeViewItem(dashboardControl));
+  dashboardControl.registerExtension(new FunnelD3Item(dashboardControl));
 }
 
 function App() {  
