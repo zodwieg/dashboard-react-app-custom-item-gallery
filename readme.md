@@ -23,6 +23,7 @@ This example uses a client-server architecture. The server (backend) project com
 * [WebPageItem.js](dashboard-react-app/src/items/WebPageItem.js)
 * [GanttItem.js](dashboard-react-app/src/items/GanttItem.js)
 * [HierarchicalTreeViewItem.js](dashboard-react-app/src/items/HierarchicalTreeViewItem.js)
+* [FunnelD3Item.js](dashboard-react-app/src/items/FunnelD3Item.js)
 * [App.js](dashboard-react-app/src/App.js)
 
 
@@ -69,6 +70,20 @@ A custom **Simple Table** item renders data from the measure / dimensions as an 
 
 - **Show Headers** - Specifies whether to show the field headers in the table. The default value is `Auto`.
 - **Text Color** - Allows you to change the text color. The default value is `Dark`.
+
+### Funnel D3 Chart Item
+
+**View Script**: [FunnelD3Item.js](dashboard-react-app/src/items/FunnelD3Item.js)
+
+A custom **Funnel D3 Chart** item renders a funnel chart using the [D3Funnel](https://github.com/jakezatecky/d3-funnel/blob/master/README.md) JS library. This custom item supports the following settings that you can configure in the Web Dashboard UI:
+
+![funnel-d3-item](images/funnel-d3-item.png)
+
+- **Fill Type** - Specifies the funnel chart's solid or gradient fill type.
+- **Curved** - Specifies whether the funnel is curved.
+- **Dynamic Height** - Specifies whether the height of blocks are proportional to their weight.
+- **Pinch Count** - Specifies how many blocks to pinch at the bottom to create a funnel "neck".
+
 
 ### Polar Chart Item
 
